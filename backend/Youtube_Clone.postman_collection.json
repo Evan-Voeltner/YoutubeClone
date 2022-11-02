@@ -1,0 +1,155 @@
+{
+	"info": {
+		"_postman_id": "319ff590-3e72-4f8a-af4b-3737dea38d49",
+		"name": "Youtube_Clone",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23502601"
+	},
+	"item": [
+		{
+			"name": "Get_Comments_By_Video_Id (Unprotected)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/comments/notsimple/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"comments",
+						"notsimple",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add_Comment (Protected)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY4MjY2NTkzLCJpYXQiOjE2Njc0MDI1OTMsImp0aSI6IjQyZTlmZWFmZTIyMTQ0MDM4Y2QwOWFhMGUyZDgzODVlIiwidXNlcl9pZCI6MiwidXNlcm5hbWUiOiJ2b2x0c3kiLCJmaXJzdF9uYW1lIjoiIn0.BpGxhQwcSkPT1HUKbgmBsjww2n147V0cf4m_1rve4EI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"video_id\": \"notsimple\",\r\n        \"text\": \"GOOD GOOD GOOD GOOD\",\r\n        \"likes\": 0,\r\n        \"dislikes\": 10\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/comments/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"comments",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update_Comment (Protected)",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY4MjY2NTkzLCJpYXQiOjE2Njc0MDI1OTMsImp0aSI6IjQyZTlmZWFmZTIyMTQ0MDM4Y2QwOWFhMGUyZDgzODVlIiwidXNlcl9pZCI6MiwidXNlcm5hbWUiOiJ2b2x0c3kiLCJmaXJzdF9uYW1lIjoiIn0.BpGxhQwcSkPT1HUKbgmBsjww2n147V0cf4m_1rve4EI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"video_id\": \"notsimple\",\r\n    \"text\": \"GOOD GOOD BAD GOOD\",\r\n    \"likes\": 0,\r\n    \"dislikes\": 10\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/comments/id/1/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"comments",
+						"id",
+						"1",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get_Replies (Protected)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY4MjY2NTkzLCJpYXQiOjE2Njc0MDI1OTMsImp0aSI6IjQyZTlmZWFmZTIyMTQ0MDM4Y2QwOWFhMGUyZDgzODVlIiwidXNlcl9pZCI6MiwidXNlcm5hbWUiOiJ2b2x0c3kiLCJmaXJzdF9uYW1lIjoiIn0.BpGxhQwcSkPT1HUKbgmBsjww2n147V0cf4m_1rve4EI",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/comments/replies/3/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"comments",
+						"replies",
+						"3",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add_Reply_To_Comment (Protected)",
+			"request": {
+				"method": "POST",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
