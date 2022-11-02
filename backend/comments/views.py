@@ -5,6 +5,8 @@ from rest_framework.decorators import api_view, permission_classes
 from .models import Comment
 from .serializers import CommentSerializer
 from django.shortcuts import get_object_or_404
+from replies.models import Reply
+from replies.serializers import ReplySerializer
 
 
 @api_view(['GET'])
@@ -25,11 +27,16 @@ def user_comments(request, pk):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)     
 
-@api_view(['PUT'])
+@api_view(['PUT', 'GET'])
 @permission_classes([IsAuthenticated])
 def update_comment(request, pk):
-    comment = get_object_or_404(Comment, pk=pk)
-    serializer = CommentSerializer(comment, data=request.data)
-    serializer.is_valid(raise_exception=True)
-    serializer.save()
-    return Response(serializer.data, status=status.HTTP_200_OK)
+    if request.method == 'PUT':
+        comment = get_object_or_404(Comment, pk=pk)
+        serializer = CommentSerializer(comment, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    elif request.method == 'GET':
+        replies = Reply.objects.filter(comment = pk)
+        serializer = ReplySerializer(replies, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
