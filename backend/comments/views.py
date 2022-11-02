@@ -27,7 +27,7 @@ def user_comments(request, pk):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)     
 
-@api_view(['PUT', 'GET'])
+@api_view(['PUT', 'GET', 'POST'])
 @permission_classes([IsAuthenticated])
 def update_comment(request, pk):
     if request.method == 'PUT':
@@ -40,3 +40,10 @@ def update_comment(request, pk):
         replies = Reply.objects.filter(comment = pk)
         serializer = ReplySerializer(replies, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+    elif request.method == 'POST':
+        serializer = ReplySerializer(data=request.data)
+        if serializer.is_valid():
+            comment = get_object_or_404(Comment, pk=pk)
+            serializer.save(user=request.user, comment = comment)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
