@@ -1,5 +1,8 @@
 // General Imports
 import { Routes, Route } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import keys from "./API_keys.json"
+import axios from "axios";
 import "./App.css";
 
 // Pages Imports
@@ -28,6 +31,12 @@ import VideoPlayer from "./components/VideoPlayer/VideoPlayer";
 import PrivateRoute from "./utils/PrivateRoute";
 
 function App() {
+  
+  useEffect(() => {
+    console.log(keys.googleAPIKey);
+  }
+  )
+
   return (
     <div>
       <Navbar />

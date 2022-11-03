@@ -128,3 +128,6 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+#googleAPI_key.json
+frontend/src/API_Keys.json
