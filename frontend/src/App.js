@@ -1,7 +1,7 @@
 // General Imports
-import { Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-import keys from "./API_keys.json"
+import keys from "./API_Keys.json";
 import axios from "axios";
 import "./App.css";
 
@@ -39,6 +39,7 @@ function App() {
 
   return (
     <div>
+      <SearchPage />
       <Navbar />
       <Routes>
         <Route
