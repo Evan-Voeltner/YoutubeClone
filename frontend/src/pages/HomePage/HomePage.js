@@ -28,19 +28,6 @@ const HomePage = () => {
     };
     fetchCars();
   }, [token]);
-
-  // useEffect(() => {
-  //   const fetchSearchData = async() => {
-  //     try {
-  //       let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${searchTerm}&key=AIzaSyAhwXWwdhBd0-omztcNvBpQ-yfAihxIgR4`);
-  //       console.log(response);
-  //       setSearchResults(response.data.items)
-  //     } catch (error) {
-  //       console.log(error.response.data);
-  //     }
-  //   }
-    // fetchSearchData();
-  // }, [])
   
   return (
     <div className="container">
