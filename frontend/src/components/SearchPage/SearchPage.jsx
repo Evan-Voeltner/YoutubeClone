@@ -20,10 +20,10 @@ const SearchPage = (props) => {
   return (
     <div>
       <SearchBar getVideoResults={getVideoResults} />
-      {videoResults.items.map((result) => {
+      {/* {videoResults.items.map((result) => {
         return (
             <tr></tr>
-        )})}
+        )})} */}
     </div>
   );
 };
