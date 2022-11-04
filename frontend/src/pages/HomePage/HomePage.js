@@ -10,6 +10,8 @@ const HomePage = () => {
   //TODO: Add an AddCars Page to add a car for a logged in user's garage
   const [user, token] = useAuth();
   const [cars, setCars] = useState([]);
+  const [searchResults, setSearchResults] = useState([])
+  const [searchTerm, setSearchTerm] = useState('')
 
   useEffect(() => {
     const fetchCars = async () => {
@@ -26,6 +28,20 @@ const HomePage = () => {
     };
     fetchCars();
   }, [token]);
+
+  // useEffect(() => {
+  //   const fetchSearchData = async() => {
+  //     try {
+  //       let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${searchTerm}&key=AIzaSyAhwXWwdhBd0-omztcNvBpQ-yfAihxIgR4`);
+  //       console.log(response);
+  //       setSearchResults(response.data.items)
+  //     } catch (error) {
+  //       console.log(error.response.data);
+  //     }
+  //   }
+    // fetchSearchData();
+  // }, [])
+  
   return (
     <div className="container">
       <h1>Home Page for {user.username}!</h1>
