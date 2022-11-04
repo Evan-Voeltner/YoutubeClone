@@ -42,6 +42,8 @@ function App() {
     <div>
       <SearchPage />
       <Navbar />
+      <VideoPage />
+      <RelatedVideos />
       <Routes>
         <Route
           path="/"
