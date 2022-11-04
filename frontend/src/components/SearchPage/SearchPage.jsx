@@ -11,8 +11,9 @@ const SearchPage = (props) => {
       let response = await axios.get(
         `https://www.googleapis.com/youtube/v3/search?q=${searchQuery}&key=${keys.googleAPIKey}`
       );
-      setVideoResults(response.data);
-      console.log(response.data);
+      let suggestedVideos = response.data.items;
+      console.log(suggestedVideos);
+      setVideoResults(suggestedVideos);
     } catch (error) {
       console.log(error.message);
     }
@@ -20,10 +21,13 @@ const SearchPage = (props) => {
   return (
     <div>
       <SearchBar getVideoResults={getVideoResults} />
-      {/* {videoResults.items.map((result) => {
-        return (
-            <tr></tr>
-        )})} */}
+        {videoResults.map((result) => {
+          console.log(result, 'Raw Result')
+          console.log(result.id.videoId)
+          return(
+          <p>{result.id.videoId}</p>
+          );
+        })}
     </div>
   );
 };
