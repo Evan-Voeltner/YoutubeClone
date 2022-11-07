@@ -38,6 +38,7 @@ import PrivateRoute from "./utils/PrivateRoute";
 function App() {
   const [currentVideo, setCurrentVideo] = useState([]);
   const [videoResults, setVideoResults] = useState([]);
+  const [relatedVideos, setRelatedVideos] = useState([]);
   let navigate = useNavigate();
 
   useEffect(() => {
@@ -47,6 +48,7 @@ function App() {
   function goToCurrentVideo(newVideoObject) {
     console.log("newVideoObject", newVideoObject);
     setCurrentVideo(newVideoObject);
+    getRelatedVideos(newVideoObject.id.videoId);
     navigate("/video");
   }
 
@@ -59,6 +61,20 @@ function App() {
       console.log("inital axios call", suggestedVideos);
       setVideoResults(suggestedVideos);
       navigate("/search");
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
+  async function getRelatedVideos(currentVideoID) {
+    console.log("Get related videos triggered", currentVideoID);
+    try {
+      let response = await axios.get(
+        `https://www.googleapis.com/youtube/v3/search?relatedToVideoId=${currentVideoID}&type=video&key=${keys.googleAPIKey}&part=snippet`
+      );
+      let relatedVideos = response.data.items;
+      console.log("Inital axios call for related videos", relatedVideos);
+      setRelatedVideos(relatedVideos);
     } catch (error) {
       console.log(error.message);
     }
@@ -82,7 +98,13 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route
           path="/video"
-          element={<VideoPage currentVideo={currentVideo} />}
+          element={
+            <VideoPage
+              currentVideo={currentVideo}
+              relatedVideos={relatedVideos}
+              goToCurrentVideo={goToCurrentVideo}
+            />
+          }
         />
       </Routes>
       <Footer />
