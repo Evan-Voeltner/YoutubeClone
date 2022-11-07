@@ -37,6 +37,7 @@ import PrivateRoute from "./utils/PrivateRoute";
 
 function App() {
   const [currentVideo, setCurrentVideo] = useState([]);
+  const [videoResults, setVideoResults] = useState([]);
   let navigate = useNavigate();
 
   useEffect(() => {
@@ -44,19 +45,45 @@ function App() {
   });
 
   function goToCurrentVideo(newVideoObject) {
-    console.log('newVideoObject', newVideoObject)
+    console.log("newVideoObject", newVideoObject);
     setCurrentVideo(newVideoObject);
     navigate("/video");
+  }
+
+  async function getVideoResults(searchQuery) {
+    try {
+      let response = await axios.get(
+        `https://www.googleapis.com/youtube/v3/search?q=${searchQuery}&key=${keys.googleAPIKey}&part=snippet`
+      );
+      let suggestedVideos = response.data.items;
+      console.log("inital axios call", suggestedVideos);
+      setVideoResults(suggestedVideos);
+      navigate("/search");
+    } catch (error) {
+      console.log(error.message);
+    }
   }
 
   return (
     <div className="app">
       <Navbar />
-      <SearchPage goToCurrentVideo={goToCurrentVideo}/>
+      <SearchBar getVideoResults={getVideoResults} />
       <Routes>
+        <Route
+          path="/search"
+          element={
+            <SearchPage
+              goToCurrentVideo={goToCurrentVideo}
+              videoResults={videoResults}
+            />
+          }
+        />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/video" element={<VideoPage currentVideo={currentVideo}/>} />
+        <Route
+          path="/video"
+          element={<VideoPage currentVideo={currentVideo} />}
+        />
       </Routes>
       <Footer />
     </div>

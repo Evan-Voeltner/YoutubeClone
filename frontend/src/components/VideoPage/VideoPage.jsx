@@ -3,12 +3,12 @@ import React from "react";
 
 const VideoPage = (props) => {
   console.log('Video in videoPage', props)
-  let videoSource = `https://www.youtube.com/embed/${props.currentVideo.id.videoId}`
 
-  
   return (
     <div>
-      <iframe src={videoSource} frameBorder="0"></iframe>
+      <h1>{props.currentVideo.snippet.title}</h1>
+      <iframe src={`https://www.youtube.com/embed/${props.currentVideo.id.videoId}`} frameBorder="0"></iframe>
+      <p>{props.currentVideo.snippet.description}</p>
     </div>
 
 
