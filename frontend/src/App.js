@@ -1,5 +1,11 @@
 // General Imports
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link,
+  useNavigate,
+} from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import keys from "./API_Keys.json";
 import axios from "axios";
@@ -26,33 +32,31 @@ import SearchPage from "./components/SearchPage/SearchPage";
 import VideoPage from "./components/VideoPage/VideoPage";
 import VideoPlayer from "./components/VideoPlayer/VideoPlayer";
 
-
 // Util Imports
 import PrivateRoute from "./utils/PrivateRoute";
 
 function App() {
-  
-  
+  const [currentVideo, setCurrentVideo] = useState([]);
+  let navigate = useNavigate();
+
   useEffect(() => {
     console.log(keys.googleAPIKey);
+  });
+
+  function goToCurrentVideo(newVideoObject) {
+    console.log('newVideoObject', newVideoObject)
+    setCurrentVideo(newVideoObject);
+    navigate("/video");
   }
-  )
 
   return (
     <div className="app">
       <Navbar />
-      <SearchPage />
+      <SearchPage goToCurrentVideo={goToCurrentVideo}/>
       <Routes>
-        <Route
-          path="/"
-          element={
-            <PrivateRoute>
-              <HomePage />
-            </PrivateRoute>
-          }
-        />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/video" element={<VideoPage currentVideo={currentVideo}/>} />
       </Routes>
       <Footer />
     </div>

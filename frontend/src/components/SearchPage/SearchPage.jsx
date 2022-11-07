@@ -13,7 +13,7 @@ const SearchPage = (props) => {
         `https://www.googleapis.com/youtube/v3/search?q=${searchQuery}&key=${keys.googleAPIKey}&part=snippet`
       );
       let suggestedVideos = response.data.items;
-      console.log(suggestedVideos);
+      console.log('inital axios call',suggestedVideos);
       setVideoResults(suggestedVideos);
     } catch (error) {
       console.log(error.message);
@@ -25,7 +25,12 @@ const SearchPage = (props) => {
       {videoResults.map((result) => {
         console.log(result, "Raw Result");
         return (
-            <VideoPreview videoInfo={result.snippet}/>
+          <div>
+            <VideoPreview
+              videoInfo={result}
+              goToCurrentVideo={props.goToCurrentVideo}
+            />
+          </div>
         );
       })}
     </div>
