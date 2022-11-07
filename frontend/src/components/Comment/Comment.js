@@ -26,7 +26,7 @@ const Comments = () => {
         }
       );
 
-      dispatch(addComment(data));
+      dispatch(data);
       comment.setValue("");
     }
   };
@@ -48,9 +48,6 @@ const Comments = () => {
       {comments &&
         comments.map((comment) => (
           <div key={comment.id} className="comment">
-            <Link to={`/channel/${comment.User?.id}`}>
-              <img src={comment.User?.avatar} alt="avatar" />
-            </Link>
             <div className="comment-info">
               <p className="secondary">
                 <span style={{ marginLeft: "0.6rem" }}>

@@ -1,15 +1,23 @@
 import React from "react";
-import { Grid } from "@material-ui/core";
-import VideoPage from "../VideoPage/VideoPage";
+import VideoPreview from "../VideoPreview/VideoPreview";
 
-const RelatedVideos = ({ videos, onVideoSelect }) => {
-  const ListOfVideos = videos.map((video, id) => (
-    <VideoPage onVideoSelect={onVideoSelect} key={id} video={video} />
-  ));
+
+const RelatedVideos = (props) => {
+  
   return (
-    <Grid container spacing={10}>
-      {ListOfVideos}
-    </Grid>
+    <div>
+      {props.relatedVideos.map((result) => {
+        console.log(result, "Raw Result");
+        return (
+          <div>
+            <VideoPreview
+              videoInfo={result}
+              goToCurrentVideo={props.goToCurrentVideo}
+            />
+          </div>
+        );
+      })}
+    </div>
   );
 };
 
