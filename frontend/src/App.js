@@ -39,11 +39,9 @@ function App() {
   )
 
   return (
-    <div>
-      <SearchPage />
+    <div className="app">
       <Navbar />
-      <VideoPage />
-      <RelatedVideos />
+      <SearchPage />
       <Routes>
         <Route
           path="/"
