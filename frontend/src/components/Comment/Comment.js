@@ -1,9 +1,9 @@
 import React from "react";
-import userInput from "../hooks/userInput";
+import useInput from "../../hooks/useInput";
 
 
 
 const Comments = () => {
-  const comment = userInput("");
+  const comment = useInput("");
 
-};
+}
