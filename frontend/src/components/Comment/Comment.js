@@ -1,7 +1,9 @@
 import React from "react";
+import axios from "axios";
 import useInput from "../../hooks/useInput";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { timeSense } from "../../utils/timeSense";
 import "../../components/Comment/Comment.css";
 
 
@@ -17,9 +19,12 @@ const Comments = () => {
     if (e.keyCode === 13) {
       e.target.blur();
 
-      if (!comment.value.trim()) {
-        return toast.error("Please write a comment");
-      }
+      const { data } = await axios.post(
+        `$http://localhost:3000/api/comments/videos/${videoId}/comment`,
+        {
+          body: { text: comment.value },
+        }
+      );
 
       dispatch(addComment(data));
       comment.setValue("");
@@ -27,7 +32,7 @@ const Comments = () => {
   };
 
   return (
-    <Wrapper>
+    <div className="comment-body">
       <h3>{comments?.length} comments</h3>
 
       <div className="add-comment">
@@ -48,20 +53,15 @@ const Comments = () => {
             </Link>
             <div className="comment-info">
               <p className="secondary">
-                <span>
-                  <Link to={`/channel/${comment.User?.id}`}>
-                    {comment.User?.username}
-                  </Link>
-                </span>
                 <span style={{ marginLeft: "0.6rem" }}>
-                  {timeSince(comment.createdAt)} ago
+                  {timeSense(comment.createdAt)} ago
                 </span>
               </p>
               <p>{comment.text}</p>
             </div>
           </div>
         ))}
-    </Wrapper>
+    </div>
   );
 };
 
