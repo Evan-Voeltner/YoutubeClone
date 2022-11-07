@@ -2,7 +2,6 @@ import React from "react";
 import axios from "axios";
 import useInput from "../../hooks/useInput";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import { timeSense } from "../../utils/timeSense";
 import "../../components/Comment/Comment.css";
 
