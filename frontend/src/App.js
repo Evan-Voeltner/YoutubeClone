@@ -89,7 +89,7 @@ function App() {
       );
 
       let comments = response.data;
-      console.log("Axios call for comments", videoId);
+      console.log("Axios call for comments", comments);
       setVideoComments(comments);
     } catch (error) {
       console.log(error.message);

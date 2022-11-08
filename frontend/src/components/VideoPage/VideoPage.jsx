@@ -18,7 +18,7 @@ const VideoPage = (props) => {
         relatedVideos={props.relatedVideos}
         goToCurrentVideo={props.goToCurrentVideo}
       /> */}
-      <CommentList videoId={props.currentVideo.id.videoId}/>
+      <CommentList videoComments={props.videoComments}/>
     </div>
   );
 };

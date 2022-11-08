@@ -1,27 +1,14 @@
 import React from "react";
-import axios from "axios";
-import useInput from "../../hooks/useInput";
-import { useDispatch, useSelector } from "react-redux";
-import { timeSense } from "../../utils/timeSense";
 import "../../components/Comment/Comment.css";
 
 const Comment = (props) => {
-
-  return(
+  return (
     <div>
-      <h2></h2>
+      {console.log('From comment component',props.newComment)}
+      <h2>{props.newComment.user.username}</h2>
+      <h5>{props.newComment.text}</h5>
     </div>
-  )
-
-
-
-
-
-
-
-
-
-
+  );
 
   // const comment = useInput("");
 
