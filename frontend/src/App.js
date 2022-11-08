@@ -39,16 +39,18 @@ function App() {
   const [currentVideo, setCurrentVideo] = useState([]);
   const [videoResults, setVideoResults] = useState([]);
   const [relatedVideos, setRelatedVideos] = useState([]);
+  const [videoComments, setVideoComments] = useState([]);
   let navigate = useNavigate();
 
   useEffect(() => {
-    console.log(keys.googleAPIKey);
+    // console.log(keys.googleAPIKey);
   });
 
   function goToCurrentVideo(newVideoObject) {
     console.log("newVideoObject", newVideoObject);
     setCurrentVideo(newVideoObject);
-    getRelatedVideos(newVideoObject.id.videoId);
+    // getRelatedVideos(newVideoObject.id.videoId);
+    getVideoComments(newVideoObject.id.videoId);
     navigate("/video");
   }
 
@@ -80,6 +82,20 @@ function App() {
     }
   }
 
+  async function getVideoComments(videoId) {
+    try {
+      let response = await axios.get(
+        `http://127.0.0.1:8000/api/comments/${videoId}/`
+      );
+
+      let comments = response.data;
+      console.log("Axios call for comments", videoId);
+      setVideoComments(comments);
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
   return (
     <div className="app">
       <Navbar />
@@ -102,6 +118,7 @@ function App() {
             <VideoPage
               currentVideo={currentVideo}
               relatedVideos={relatedVideos}
+              videoComments={videoComments}
               goToCurrentVideo={goToCurrentVideo}
             />
           }
