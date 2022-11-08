@@ -1,20 +1,28 @@
 import React, { useState } from "react";
 
 const CommentForm = (props) => {
-  const [newComment, setNewComment] = useState("");
+  const [commentText, setCommentText] = useState("");
 
- function handleSubmit(event){
+  function handleSubmit(event) {
     event.preventDefault();
-
- }
+    
+    let newComment = {
+        video_id: props.videoId,
+        text: commentText,
+        likes: 0,
+        dislikes: 0
+    }
+    console.log("New Comment", newComment);
+    props.postNewComment(newComment);
+  }
 
   return (
     <div>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
-          value={newComment}
-          onChange={(event) => setNewComment(event.target.value)}
+          value={commentText}
+          onChange={(event) => setCommentText(event.target.value)}
         />
         <button type="submit">Add Comment</button>
       </form>

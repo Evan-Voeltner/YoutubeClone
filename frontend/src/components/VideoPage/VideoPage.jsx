@@ -2,6 +2,7 @@ import React from "react";
 import { Grid, Paper, Typography } from "@material-ui/core";
 import RelatedVideos from "../RelatedVideos/RelatedVideos";
 import CommentList from "../CommentList/CommentList";
+import CommentForm from "../CommentForm/CommentForm";
 
 const VideoPage = (props) => {
   console.log("Video in videoPage", props);
@@ -18,6 +19,7 @@ const VideoPage = (props) => {
         relatedVideos={props.relatedVideos}
         goToCurrentVideo={props.goToCurrentVideo}
       /> */}
+      <CommentForm videoId={props.currentVideo.id.videoId} postNewComment={props.postNewComment}/>
       <CommentList videoComments={props.videoComments}/>
     </div>
   );

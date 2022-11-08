@@ -19,7 +19,7 @@ def get_all_comments(request, video_id_str):
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
-def user_comments(request, pk):
+def user_comments(request):
     if request.method == 'POST':
         serializer = CommentSerializer(data=request.data)
         if serializer.is_valid():

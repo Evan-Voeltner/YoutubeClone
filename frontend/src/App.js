@@ -10,6 +10,7 @@ import React, { useEffect, useState } from "react";
 import keys from "./API_Keys.json";
 import axios from "axios";
 import "./App.css";
+import useAuth from "./hooks/useAuth";
 
 // Pages Imports
 import HomePage from "./pages/HomePage/HomePage";
@@ -34,12 +35,16 @@ import VideoPlayer from "./components/VideoPlayer/VideoPlayer";
 
 // Util Imports
 import PrivateRoute from "./utils/PrivateRoute";
+import { InvalidTokenError } from "jwt-decode";
 
 function App() {
+  const [user, token] = useAuth();
+
   const [currentVideo, setCurrentVideo] = useState([]);
   const [videoResults, setVideoResults] = useState([]);
   const [relatedVideos, setRelatedVideos] = useState([]);
   const [videoComments, setVideoComments] = useState([]);
+  const [newComment, setNewComment] = useState([]);
   let navigate = useNavigate();
 
   useEffect(() => {
@@ -65,6 +70,19 @@ function App() {
       navigate("/search");
     } catch (error) {
       console.log(error.message);
+    }
+  }
+
+  async function postNewComment(newComment) {
+    console.log("postnewComment Triggered", newComment);
+    console.log('userToken', token);
+
+    let response = await axios.post(`http://127.0.0.1:8000/api/comments/`, newComment, {
+      headers: { Authorization: "Bearer " + token },
+    });
+
+    if (response.status === 201) {
+      await getVideoComments(currentVideo.id.videoId);
     }
   }
 
@@ -120,6 +138,7 @@ function App() {
               relatedVideos={relatedVideos}
               videoComments={videoComments}
               goToCurrentVideo={goToCurrentVideo}
+              postNewComment={postNewComment}
             />
           }
         />
