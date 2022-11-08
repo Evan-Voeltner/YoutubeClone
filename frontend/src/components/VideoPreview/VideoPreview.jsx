@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 const VideoPreview = (props) => {
   function handleSubmit(event) {

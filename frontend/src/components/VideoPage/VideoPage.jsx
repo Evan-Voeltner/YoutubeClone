@@ -1,5 +1,4 @@
 import React from "react";
-import { Grid, Paper, Typography } from "@material-ui/core";
 import RelatedVideos from "../RelatedVideos/RelatedVideos";
 import CommentList from "../CommentList/CommentList";
 import CommentForm from "../CommentForm/CommentForm";
@@ -15,12 +14,12 @@ const VideoPage = (props) => {
         frameBorder="0"
       ></iframe>
       <p>{props.currentVideo.snippet.description}</p>
-      {/* <RelatedVideos
-        relatedVideos={props.relatedVideos}
-        goToCurrentVideo={props.goToCurrentVideo}
-      /> */}
       <CommentForm videoId={props.currentVideo.id.videoId} postNewComment={props.postNewComment}/>
       <CommentList videoComments={props.videoComments}/>
+      <RelatedVideos
+        relatedVideos={props.relatedVideos}
+        goToCurrentVideo={props.goToCurrentVideo}
+      />
     </div>
   );
 };

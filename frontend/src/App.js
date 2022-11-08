@@ -16,22 +16,14 @@ import useAuth from "./hooks/useAuth";
 import HomePage from "./pages/HomePage/HomePage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
-import Page from "./pages/Page/Page";
+import SearchPage from "./components/SearchPage/SearchPage";
+import VideoPage from "./components/VideoPage/VideoPage";
 
 // Component Imports
 import Navbar from "./components/NavBar/NavBar";
 import Footer from "./components/Footer/Footer";
-import Comment from "./components/Comment/Comment";
-import CommentForm from "./components/CommentForm/CommentForm";
-import CommentList from "./components/CommentList/CommentList";
-import RelatedVideos from "./components/RelatedVideos/RelatedVideos";
-import Reply from "./components/Reply/Reply";
-import ReplyForm from "./components/ReplyForm/ReplyForm";
-import ReplyList from "./components/ReplyList/ReplyList";
 import SearchBar from "./components/SearchBar/SearchBar";
-import SearchPage from "./components/SearchPage/SearchPage";
-import VideoPage from "./components/VideoPage/VideoPage";
-import VideoPlayer from "./components/VideoPlayer/VideoPlayer";
+
 
 // Util Imports
 import PrivateRoute from "./utils/PrivateRoute";
@@ -54,7 +46,7 @@ function App() {
   function goToCurrentVideo(newVideoObject) {
     console.log("newVideoObject", newVideoObject);
     setCurrentVideo(newVideoObject);
-    // getRelatedVideos(newVideoObject.id.videoId);
+    getRelatedVideos(newVideoObject.id.videoId);
     getVideoComments(newVideoObject.id.videoId);
     navigate("/video");
   }
@@ -143,7 +135,6 @@ function App() {
           }
         />
       </Routes>
-      <Footer />
     </div>
   );
 }
